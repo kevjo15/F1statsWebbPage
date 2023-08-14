@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Skolinlämning.Models.Driver>
+@using (Html.BeginForm("DriverDetails", "Api", FormMethod.Get))
+{
+    <form class="form-row" asp-controller="Api" asp-action="DriverDetails" method="post">
+        <div class="col">
+            <input type="text" class="form-control mt-3" placeholder="Search" name="SearchTerm" />
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary mt-2" style="width: 150px; height: 50px;">Search</button>
+            <a asp-action="DriverDetails" class="btn btn-outline-danger mx-0 mt-2">Back to List</a>
+            <h2 style="text-decoration: underline #d9534f " class="text-center">Driver Details</h2>
+        </div>
+    </form>
+
+
+}
+<div class="container mt-3">
+    
+
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row justify-content-around flex-wrap mt-4">
+            @foreach (var driver in Model)
+            {
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card bg-dark" style="width: 100%; min-height: 1rem; padding: 1rem; border: 3px solid #d9534f;">
+                        <div class="card-body">
+                            <h5 style="text-decoration: underline #d9534f " class="card-title text-light">@driver.GivenName @driver.FamilyName</h5>
+                            <h6 class="card-subtitle text-warning mb-2">@driver.Nationality</h6>
+                            <p class="card-text text-light">ID: @driver.DriverId</p>
+                            <p class="card-text text-light">Permanent Number: @driver.PermanentNumber</p>
+                            <p class="card-text text-light">DOB: @driver.DateOfBirth</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-4">
+                <p>No driver details found.</p>
+            </div>
+        </div>
+    }
+</div>

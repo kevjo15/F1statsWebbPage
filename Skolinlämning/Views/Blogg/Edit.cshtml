@@ -1,0 +1,36 @@
+﻿@model Skolinlämning.Models.BloggPost
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <h2 class="text-center">Edit</h2>
+        <h4 class="text-center">Content</h4>
+        <form asp-action="Edit" asp-route-id="@Model.ID" method="post">
+            <input type="hidden" asp-for="ID" />
+            <input type="hidden" asp-for="Author" /> <!-- Här är det dolda fältet för "Author" -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea asp-for="Content" class="form-control" rows="10" style="resize: none;"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3 d-flex justify-content-end">
+                <a asp-action="Index" class="btn btn-Light mr-2">Back to List</a>
+                <input type="submit" value="Edit" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
